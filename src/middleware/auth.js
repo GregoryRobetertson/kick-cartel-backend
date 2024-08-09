@@ -1,13 +1,20 @@
-const firebaseAuth = require('firebase-admin/auth');
+'use strict';
 
-async function authenticateUser(req, res, next) {
-  const idToken = req.headers.authorization.split('Bearer ')[1];
-  try {
-    const decodedToken = await firebaseAuth.verifyIdToken(idToken);
-    req.user = decodedToken;
-    next();
-  } catch (error) {
-    console.error('Error verifying ID token:', error);
-    res.status(401).json({ error: 'Unauthorized' });
-  }
+const jwt = require('jsonwebtoken');
+
+function auth(req, res, next) {
+    const token = req.header("Authorization").replace('Bearer', "");
+    if(!token) {
+        return res.status(401).json({error: "Access denied. Provide a token"});
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.SECRET);
+        req.role = decoded.role;
+        console.log(decoded, req.role, 'AUTH FUNCTION');
+        next();
+    } catch (error) {
+        res.status(400).json({error: 'Invalid token'})
+    }
 }
+
+module.exports = auth;

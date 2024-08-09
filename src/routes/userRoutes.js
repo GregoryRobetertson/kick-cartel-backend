@@ -1,5 +1,6 @@
 'use strict';
-const { register, login, getUsers, getOneUser, deleteOneUser, updateOneUser } = require('../controllers/userController');
+
+const { getUsers, getOneUser, deleteOneUser, updateOneUser, register, login } = require('../Controllers/userController');
 const auth = require('../middleware/auth');
 
 const { checkEmail, checkPassword, signToken } = require('../middleware/login');
