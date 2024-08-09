@@ -11,7 +11,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'coffee',
+    folder: 'shoes',
     allowedFormats: ['jpg', 'png', 'jpeg'],
   },
 });

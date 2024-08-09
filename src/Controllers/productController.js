@@ -68,14 +68,14 @@ async function updateProductById(req, res, next) {
 
 async function getByCategory(req, res, next) {
   try {
-    // localhost:3001/products?category="drinks"
+  
     const {
       page = 1,
       limit = 3,
       category,
       sortBy,
       sortOrder = 'asc',
-    } = req.query; // "drinks"
+    } = req.query; 
 
     const filter = category ? { category } : {};
 
